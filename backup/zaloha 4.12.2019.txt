@@ -1,0 +1,94 @@
+-- import Data.List
+
+main :: IO ()
+main = do 
+  -- input <- readFile "Crimes_2008.txt"
+  -- print $ separateLines input
+  putStrLn("_______________________________________________________________________________________________________")
+  putStrLn("")
+  putStrLn("Input:")
+  putStrLn("")
+  let input2 = [[1, 0.5, 0], [0, 0.5, 1], [0.5, 0, 0.5], [1, 0.5, 0.5]]
+  -- print input2
+  putStrLn("| 1.0 | 0.5 | 0.0 |")
+  putStrLn("-------------------")
+  putStrLn("| 0.0 | 0.5 | 1.0 |")
+  putStrLn("-------------------")
+  putStrLn("| 0.5 | 0.0 | 0.5 |")
+  putStrLn("-------------------")
+  putStrLn("| 1.0 | 0.5 | 0.5 |")
+  putStrLn("")
+  -- let x1 = [0,3]
+  -- let x3 = [2,3]
+  -- let idx = 2
+  -- let minimum2 = min ((upArrow input2 x1) !! idx) ((upArrow input2 x3) !! idx)
+  -- let inputClusters = dClusters input2
+  -- putStrLn("Vstupné clustre pre algoritmus:")
+  putStrLn("")
+  -- print inputClusters
+  -- print minimum2
+  putStrLn("=======================================================================================================")
+  
+-- readFile
+separateLines input = map (wordsWhen (=='\t')) (lines input)
+
+wordsWhen     :: (Char -> Bool) -> String -> [String]
+wordsWhen p s =  case dropWhile p s of
+                      "" -> []
+                      s' -> w : wordsWhen p s''
+                            where (w, s'') = break p s'
+-------------
+
+-- Input: [[1, 0.5, 0], [0, 0.5, 1], [0.5, 0, 0.5], [1, 0.5, 0.5]]
+
+--        Table - input:
+--       | 1.0 | 0.5 | 0.0 |
+--       | 0.0 | 0.5 | 1.0 |
+--       | 0.5 | 0.0 | 0.5 |
+--       | 1.0 | 0.5 | 0.5 |
+
+-- Returns a column of a matrix specified by index idx
+columnOnIndex [] _ = []
+columnOnIndex (x:xs) idx = (x !! idx) : columnOnIndex xs idx
+
+-- Returns columns of a matrix on specified indices idxs
+columnsOnIndices (x:xs) idxs = [columnOnIndex (x:xs) y | y <- idxs]
+
+-- Returns only rows of a matrix, which are specified by a list idxs
+filterRows (x:xs) idxs = [(x:xs) !! y | y <- idxs] 
+
+-- Returns lists of all columns of a given matrix - transposes a matrix
+allColumns (x:xs) = columnsOnIndices (x:xs) [0..(length ((x:xs) !! 0)) - 1]
+
+-- Returns a list of minima of columns of a matrix
+minimaOfColumns (x:xs) = [minimum ys | ys <- allColumns (x:xs)]
+
+-- Returns minima of columns of a matrix only from rows, which are specified by idxs
+upArrow (x:xs) idxs = minimaOfColumns (filterRows (x:xs) idxs) 
+
+-- Compares two lists whether all elements of list (x:xs) are greater or equal to elements of list (up:ups)
+compareLists [] _ = True
+compareLists (x:xs) (up:ups) = if x >= up
+                                then compareLists xs ups
+                               else False
+
+-- Returns a list of indeces of rows, in which values in all columns exceed or are equal to values in a given list  
+-- downArrow [[1, 0.5, 0], [0, 0.5, 1], [0.5, 0, 0.5], [1, 0.5, 0.5]] $ upArrow [[1, 0.5, 0], [0, 0.5, 1], [0.5, 0, 0.5], [1, 0.5, 0.5]] [0] 
+downArrow xs up = [y | y <- [0..(length xs) - 1], compareLists (xs !! y) up]
+
+-- Returns a list of indices of objects, which are in the same cluster
+-- [downArrow input2 (upArrow input2 [0])] ++ [downArrow input2 (upArrow input2 [1])]
+dClusters input = [dCluster | idx <- [0..(length input) - 1], dCluster <- [downArrow input (upArrow input [idx])]]
+
+-- Returns a list of minima of upArrows of two clusters
+minimaUpArrowsList x1 x2 input = [m | idx <- [0..(length (input !! 0)) - 1], m <- [min ((upArrow input x1) !! idx) ((upArrow input x2) !! idx)]]
+
+-- Returns a list of maxima of upArrows of two clusters
+maximaUpArrowsList x1 x2 input = [m | idx <- [0..(length (input !! 0)) - 1], m <- [max ((upArrow input x1) !! idx) ((upArrow input x2) !! idx)]]
+
+-- Returns a distance between two clusters, i.e. how similar they are
+-- distance [0,3] [2,3] [[1, 0.5, 0], [0, 0.5, 1], [0.5, 0, 0.5], [1, 0.5, 0.5]
+distance :: (Fractional a, Ord a) => [Int] -> [Int] -> [[a]] -> a
+distance x1 x2 input = 1 - (sum (minimaUpArrowsList x1 x2 input)) / (sum (maximaUpArrowsList x1 x2 input))
+
+
