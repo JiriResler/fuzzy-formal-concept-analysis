@@ -2,21 +2,17 @@ import Data.List
 
 main :: IO ()
 main = do 
-
-  putStrLn("____________________________________________________________________________________________________________________________________________________________________________________________")
-  putStrLn("")
-  putStrLn("line")
-  putStrLn("Input:")
-  putStrLn("")
-  -- let input2 = [[1, 0.5, 0], [0, 0.5, 1], [0.5, 0, 0.5], [1, 0.5, 0.5]]
-  -- contents <- readFile "test input crime values.txt"
-  contents <- readFile "test_funkcnosti_programu.txt"
+  -- contents <- readFile "test_funkcnosti_programu.txt"
+  contents <- readFile "C:/Users/Jiro/Desktop/haskell code/fuzzy-formal-concept-analysis/input/test_input_crime_values.txt"
   let l = lines contents
   let w = map words l
-  print w
-  let input2 = matrixToDoubles w
-  print input2
-  -- print input2
+  let input = matrixToDoubles w
+  putStrLn("")
+  putStrLn("Začiatok programu.")
+  putStrLn("")
+  putStrLn("Input:")
+  putStrLn("")
+  print input
   -- putStrLn("| 1.0 | 0.5 | 0.0 |")
   -- putStrLn("-------------------")
   -- putStrLn("| 0.0 | 0.5 | 1.0 |")
@@ -24,61 +20,66 @@ main = do
   -- putStrLn("| 0.5 | 0.0 | 0.5 |")
   -- putStrLn("-------------------")
   -- putStrLn("| 1.0 | 0.5 | 0.5 |")
-  putStrLn("")
-  let inputClusters = dClusters input2
-  putStrLn("Vstupné clustre pre algoritmus:")
-  print inputClusters
-  let vzdialenosti = allDistances inputClusters input2
-  putStrLn("")
-  putStrLn("Všetky vzdialenosti:")
-  print vzdialenosti
-  putStrLn("")
-  let vzdialenostiHodnoty = zoznamVzdial vzdialenosti
-  putStrLn("Hodnoty vzdialeností:")
-  print vzdialenostiHodnoty
-  putStrLn("")
-  putStrLn("Minimum:")
-  let m = minimum vzdialenostiHodnoty 
-  print m
-  putStrLn("")
-  let clustreVzdial = clustersByMinimum vzdialenosti m
-  putStrLn("Clustre s mininálnou vzdialenosťou:")
-  print clustreVzdial
-  putStrLn("")
-  let clustersWithoutDistance = tuplesWithoutDistance clustreVzdial
-  putStrLn("Epsilon:")
-  print clustersWithoutDistance
-  putStrLn("")
-  let listClusters = listOfClusters clustersWithoutDistance 
-  putStrLn("List of clusters:")
-  print listClusters
-  putStrLn("")
-  let v = nub listClusters 
-  putStrLn("V:")
-  print v 
-  putStrLn("")
-  let u = unionClusters v
-  let n = downArrow input2 $ upArrow input2 u
-  putStrLn("N:")
-  print n
-  putStrLn("")
-  let oldD = inputClusters
-  putStrLn("Pôvodné D:")
-  print oldD
-  putStrLn("")
-  putStrLn("Nové D:")
-  let newD = union (oldD \\ v) [n] 
-  print newD
-  putStrLn("")
-  let c = union oldD [n]
-  putStrLn("Nové C:")
-  print c
-  putStrLn("")
-  putStrLn("============================================================================================================================================================================================")
+  -- putStrLn("")
+  let inputClusters = dClusters input
+  riceSiffAlgorithm inputClusters input
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------
   
+riceSiffAlgorithm inputClusters input =
+  if (length inputClusters) > 1 
+    then do
+        putStrLn("Začiatok iterácie.")
+        putStrLn("Vstupné clustre:")
+        print inputClusters
+        let vzdialenosti = allDistances inputClusters input
+        putStrLn("")
+        putStrLn("Všetky vzdialenosti:")
+        print vzdialenosti
+        putStrLn("")
+        let vzdialenostiHodnoty = zoznamVzdial vzdialenosti
+        putStrLn("Hodnoty vzdialeností:")
+        print vzdialenostiHodnoty
+        putStrLn("")
+        putStrLn("Minimum:")
+        let m = minimum vzdialenostiHodnoty 
+        print m
+        putStrLn("")
+        let clustreVzdial = clustersByMinimum vzdialenosti m
+        putStrLn("Clustre s mininálnou vzdialenosťou:")
+        print clustreVzdial
+        putStrLn("")
+        let clustersWithoutDistance = tuplesWithoutDistance clustreVzdial
+        putStrLn("Epsilon:")
+        print clustersWithoutDistance
+        putStrLn("")
+        let listClusters = listOfClusters clustersWithoutDistance 
+        let v = nub listClusters 
+        putStrLn("V:")
+        print v 
+        putStrLn("")
+        let u = unionClusters v
+        let n = downArrow input $ upArrow input u
+        putStrLn("N:")
+        print n
+        putStrLn("")
+        let oldD = inputClusters
+        putStrLn("Pôvodné D:")
+        print oldD
+        putStrLn("")
+        putStrLn("Nové D:")
+        let newD = unionLists (oldD \\ v) [n] 
+        print newD
+        putStrLn("")
+        let c = unionLists oldD [n]
+        putStrLn("Nové C:")
+        print c
+        putStrLn("")
+        riceSiffAlgorithm newD input
+    else do
+        putStrLn("Koniec programu.")
+
 toDouble :: String -> Double
 toDouble = read
   
@@ -115,7 +116,7 @@ compareLists (x:xs) (up:ups) = if x >= up
 downArrow xs up = [y | y <- [0..(length xs) - 1], compareLists (xs !! y) up]
 
 -- Returns a list of indices of objects, which are in the same cluster
--- [downArrow input2 (upArrow input2 [0])] ++ [downArrow input2 (upArrow input2 [1])]
+-- [downArrow input (upArrow input [0])] ++ [downArrow input (upArrow input [1])]
 dClusters input = [dCluster | idx <- [0..(length input) - 1], dCluster <- [downArrow input (upArrow input [idx])]]
 
 -- Returns a list of minima of upArrows of two clusters
@@ -150,3 +151,5 @@ unionClustersWithDuplicates [] = []
 unionClustersWithDuplicates (x:xs) = x ++ (unionClusters xs) 
 
 unionClusters vClusters = nub $ unionClustersWithDuplicates vClusters
+
+unionLists xs ys = nub $ xs ++ ys

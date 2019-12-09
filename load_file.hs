@@ -1,3 +1,5 @@
+import Data.List
+
 main :: IO ()
 main = do
     contents <- readFile "Crimes_2008.txt"
@@ -16,3 +18,11 @@ listToDoubles xs = map toDouble xs
 matrixToDoubles input = [ listToDoubles l | l <- input]
 
 -- poslednych 7 prvkov v zozname su hodnoty zlocinov
+
+unionLists xs ys = nub $ xs ++ ys
+
+function x = do
+    putStrLn("Input:")
+    print x
+    let a = 2 * x 
+    print a
