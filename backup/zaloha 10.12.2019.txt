@@ -1,65 +1,153 @@
 import Data.List
-import System.IO
 
 main :: IO ()
 main = do 
-  inputTextFile <- readFile "input/test.txt"
-  let outputTextFile = "output/test2.txt"
-  let linesInput = separateLines inputTextFile
+  -- contents <- readFile "test_funkcnosti_programu.txt"
+  contents <- readFile "input/Crimes_2008.txt"
+  -- contents <- readFile "input/test_input_crime_values.txt"
+  -- let l = lines contents
+  let linesInput = separateLines contents
+  -- print linesInput
   let inputMatrix = matrixToDoubles $ map firstTwoOut linesInput
+  -- print inputMatrix
   let indecesBoroughs = indexAndBoroughList linesInput
+  -- print indecesBoroughs
+  -- let c = 
+  -- print "C:"
+  -- print c
+  -- let cVerbose = indecesToBoroughsMatrix c indecesBoroughs
+  -- print "C with boroughs:"
+  -- print cVerbose
+  -- let w = map words l
+  -- let input = matrixToDoubles w
+  -- putStrLn("")
+  -- putStrLn("Začiatok programu.")
+  -- putStrLn("")
+  -- putStrLn("Input:")
+  -- putStrLn("")
+  -- print input
+  -- -- putStrLn("| 1.0 | 0.5 | 0.0 |")
+  -- -- putStrLn("-------------------")
+  -- -- putStrLn("| 0.0 | 0.5 | 1.0 |")
+  -- -- putStrLn("-------------------")
+  -- -- putStrLn("| 0.5 | 0.0 | 0.5 |")
+  -- -- putStrLn("-------------------")
+  -- -- putStrLn("| 1.0 | 0.5 | 0.5 |")
+  -- -- putStrLn("")
   let inputClusters = dClusters inputMatrix
-  riceSiffAlgorithm inputMatrix inputClusters inputClusters indecesBoroughs outputTextFile
-  -- riceSiffAlgorithmWithoutCycle inputMatrix inputClusters inputClusters indecesBoroughs outputTextFile
+  riceSiffAlgorithm inputMatrix inputClusters inputClusters indecesBoroughs
+  -- riceSiffAlgorithmWithoutCycle inputMatrix inputClusters inputClusters indecesBoroughs
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------
   
-riceSiffAlgorithm input inputClusters outputClusters indecesAndBoroughs outputTextFile =
+riceSiffAlgorithm input inputClusters outputClusters indecesAndBoroughs =
   if (length inputClusters) > 1 
     then do
-        let vzdialenosti = allDistances inputClusters input
-        let vzdialenostiHodnoty = zoznamVzdial vzdialenosti
-        let m = minimum vzdialenostiHodnoty 
-        let clustreVzdial = clustersByMinimum vzdialenosti m
-        let clustersWithoutDistance = tuplesWithoutDistance clustreVzdial
-        let listClusters = listOfClusters clustersWithoutDistance 
-        let v = nub listClusters 
-        let u = unionClusters v
-        let n = downArrow input $ upArrow input u
-        let oldD = inputClusters
-        let newD = unionLists (oldD \\ v) [n] 
-        let c = unionLists oldD [n]
-        riceSiffAlgorithm input newD c indecesAndBoroughs outputTextFile
-    else do
-        let cVerbose = indecesToBoroughsMatrix outputClusters indecesAndBoroughs
-        outputFile <- openFile outputTextFile WriteMode
-        hPrint outputFile cVerbose
-        hClose outputFile
-        putStrLn("") 
-        putStrLn("Done. Check the output text file.") 
-        putStrLn("") 
-        
-
-
-riceSiffAlgorithmWithoutCycle input inputClusters outputClusters indecesAndBoroughs outputTextFile =
-      do
         putStrLn("Začiatok iterácie.")
+        -- putStrLn("Vstupné clustre:")
+        -- print inputClusters
         let vzdialenosti = allDistances inputClusters input
+        -- putStrLn("")
+        -- putStrLn("Všetky vzdialenosti:")
+        -- print vzdialenosti
+        -- putStrLn("")
         let vzdialenostiHodnoty = zoznamVzdial vzdialenosti
+        -- putStrLn("Hodnoty vzdialeností:")
+        -- print vzdialenostiHodnoty
+        -- putStrLn("")
+        -- putStrLn("Minimum:")
         let m = minimum vzdialenostiHodnoty 
+        -- print m
+        -- putStrLn("")
         let clustreVzdial = clustersByMinimum vzdialenosti m
+        -- putStrLn("Clustre s mininálnou vzdialenosťou:")
+        -- print clustreVzdial
+        -- putStrLn("")
         let clustersWithoutDistance = tuplesWithoutDistance clustreVzdial
+        -- putStrLn("Epsilon:")
+        -- print clustersWithoutDistance
+        -- putStrLn("")
         let listClusters = listOfClusters clustersWithoutDistance 
         let v = nub listClusters 
+        -- putStrLn("V:")
+        -- print v 
+        -- putStrLn("")
         let u = unionClusters v
         let n = downArrow input $ upArrow input u
+        -- putStrLn("N:")
+        -- print n
+        -- putStrLn("")
         let oldD = inputClusters
+        -- putStrLn("Pôvodné D:")
+        -- print oldD
+        -- putStrLn("")
+        -- putStrLn("Nové D:")
         let newD = unionLists (oldD \\ v) [n] 
+        -- print newD
+        -- putStrLn("")
         let c = unionLists oldD [n]
+        -- putStrLn("Nové C:")
+        -- print c
+        -- putStrLn("")
+        riceSiffAlgorithm input newD c indecesAndBoroughs
+    else do
+        putStrLn("Koniec programu.")
         let cVerbose = indecesToBoroughsMatrix outputClusters indecesAndBoroughs
-        putStrLn("Output clusters:") 
-        putStrLn("") 
+        print "Output clusters:"
+        print cVerbose
+
+riceSiffAlgorithmWithoutCycle input inputClusters outputClusters indecesAndBoroughs =
+  do
+        putStrLn("Začiatok iterácie.")
+        -- putStrLn("Vstupné clustre:")
+        -- print inputClusters
+        let vzdialenosti = allDistances inputClusters input
+        -- putStrLn("")
+        -- putStrLn("Všetky vzdialenosti:")
+        -- print vzdialenosti
+        -- putStrLn("")
+        let vzdialenostiHodnoty = zoznamVzdial vzdialenosti
+        -- putStrLn("Hodnoty vzdialeností:")
+        -- print vzdialenostiHodnoty
+        -- putStrLn("")
+        -- putStrLn("Minimum:")
+        let m = minimum vzdialenostiHodnoty 
+        -- print m
+        -- putStrLn("")
+        let clustreVzdial = clustersByMinimum vzdialenosti m
+        -- putStrLn("Clustre s mininálnou vzdialenosťou:")
+        -- print clustreVzdial
+        -- putStrLn("")
+        let clustersWithoutDistance = tuplesWithoutDistance clustreVzdial
+        -- putStrLn("Epsilon:")
+        -- print clustersWithoutDistance
+        -- putStrLn("")
+        let listClusters = listOfClusters clustersWithoutDistance 
+        let v = nub listClusters 
+        -- putStrLn("V:")
+        -- print v 
+        -- putStrLn("")
+        let u = unionClusters v
+        let n = downArrow input $ upArrow input u
+        -- putStrLn("N:")
+        -- print n
+        -- putStrLn("")
+        let oldD = inputClusters
+        -- putStrLn("Pôvodné D:")
+        -- print oldD
+        -- putStrLn("")
+        -- putStrLn("Nové D:")
+        let newD = unionLists (oldD \\ v) [n] 
+        -- print newD
+        -- putStrLn("")
+        let c = unionLists oldD [n]
+        -- putStrLn("Nové C:")
+        -- print c
+        -- putStrLn("")  
+        -- putStrLn("Koniec programu.")
+        let cVerbose = indecesToBoroughsMatrix outputClusters indecesAndBoroughs
+        print "C with boroughs:"
         print cVerbose
 
 separateLines input = map (wordsWhen (=='\t')) (lines input)

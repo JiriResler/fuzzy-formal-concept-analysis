@@ -1,24 +1,18 @@
 import Data.List
+import System.IO
 
 main :: IO ()
 main = do
     contents <- readFile "input/Crimes_2008.txt"
     let linesInput = separateLines contents
-    -- print linesInput
-
-    let indecesBoroughs = indexAndBorough linesInput
-    -- print indecesBoroughs
-    
+    let indecesBoroughs = indexAndBoroughList linesInput
     let inputMatrix = matrixToDoubles $ map firstTwoOut linesInput
-    -- print inputMatrix
-
     let c = [[1],[2,3],[0,3],[0,1,2,3]]
-    print "C:"
-    -- print c
-    let cVerbose = indexToBoroughMatrix c indecesBoroughs
-    print "C with boroughs"
-    -- print cVerbose
-    print "output.txt" c
+    let cVerbose = indecesToBoroughsMatrix c indecesBoroughs
+    let outputTextFile = "output/testOutput.txt"
+    out <- openFile outputTextFile WriteMode
+    hPrint out cVerbose
+    hClose out
 
 separateLines input = map (wordsWhen (=='\t')) (lines input)
 
@@ -48,7 +42,7 @@ function x = do
 
 firstTwoOut (x:y:tail) = tail
 
-indexAndBorough input = [ (stringToInteger index, borough) | idx <- [0..((length input) - 1)], index <- [(input !! idx) !! 0], borough <- [(input !! idx) !! 1]]
+indexAndBoroughList input = [ (stringToInteger index, borough) | idx <- [0..((length input) - 1)], index <- [(input !! idx) !! 0], borough <- [(input !! idx) !! 1]]
 
-indextoBoroughList list indecesBoroughs = [ borough | idx <- [0..((length list) - 1)], borough <- [snd (indecesBoroughs !! (list !! idx))]]
-indexToBoroughMatrix cluster indecesBoroughs = [ indextoBoroughList l indecesBoroughs | l <- cluster ] 
+indecesToBoroughsList list indecesBoroughs = [ borough | idx <- [0..((length list) - 1)], borough <- [snd (indecesBoroughs !! (list !! idx))]]
+indecesToBoroughsMatrix cluster indecesBoroughs = [ indecesToBoroughsList list indecesBoroughs | list <- cluster] 
