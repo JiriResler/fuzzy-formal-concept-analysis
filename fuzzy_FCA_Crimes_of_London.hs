@@ -3,14 +3,17 @@ import System.IO
 
 main :: IO ()
 main = do 
-  inputTextFile <- readFile "input/test.txt"
-  let outputTextFile = "output/test2.txt"
-  let linesInput = separateLines inputTextFile
+----------------------------------------------------------------------------------------------------------------------------------------
+  let inputTextFile = "input/Crimes_2008.txt"
+  let outputTextFile = "output/Crimes_2008_output_first.txt"
+----------------------------------------------------------------------------------------------------------------------------------------
+  inputFile <- readFile inputTextFile
+  let linesInput = separateLines inputFile
   let inputMatrix = matrixToDoubles $ map firstTwoOut linesInput
   let indecesBoroughs = indexAndBoroughList linesInput
   let inputClusters = dClusters inputMatrix
   riceSiffAlgorithm inputMatrix inputClusters inputClusters indecesBoroughs outputTextFile
-  -- riceSiffAlgorithmWithoutCycle inputMatrix inputClusters inputClusters indecesBoroughs outputTextFile
+  -- riceSiffAlgorithmWithoutCycle inputMatrix inputClusters inputClusters indecesBoroughs
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------
@@ -29,7 +32,7 @@ riceSiffAlgorithm input inputClusters outputClusters indecesAndBoroughs outputTe
         let n = downArrow input $ upArrow input u
         let oldD = inputClusters
         let newD = unionLists (oldD \\ v) [n] 
-        let c = unionLists oldD [n]
+        let c = unionLists outputClusters [n]
         riceSiffAlgorithm input newD c indecesAndBoroughs outputTextFile
     else do
         let cVerbose = indecesToBoroughsMatrix outputClusters indecesAndBoroughs
@@ -42,7 +45,7 @@ riceSiffAlgorithm input inputClusters outputClusters indecesAndBoroughs outputTe
         
 
 
-riceSiffAlgorithmWithoutCycle input inputClusters outputClusters indecesAndBoroughs outputTextFile =
+riceSiffAlgorithmWithoutCycle input inputClusters outputClusters indecesAndBoroughs =
       do
         putStrLn("Začiatok iterácie.")
         let vzdialenosti = allDistances inputClusters input
@@ -56,7 +59,7 @@ riceSiffAlgorithmWithoutCycle input inputClusters outputClusters indecesAndBorou
         let n = downArrow input $ upArrow input u
         let oldD = inputClusters
         let newD = unionLists (oldD \\ v) [n] 
-        let c = unionLists oldD [n]
+        let c = unionLists outputClusters [n]
         let cVerbose = indecesToBoroughsMatrix outputClusters indecesAndBoroughs
         putStrLn("Output clusters:") 
         putStrLn("") 
@@ -123,7 +126,6 @@ maximaUpArrowsList x1 x2 input = [m | idx <- [0..(length (input !! 0)) - 1], m <
 distance :: (Fractional a, Ord a) => [Int] -> [Int] -> [[a]] -> a
 distance x1 x2 input = 1 - (sum (minimaUpArrowsList x1 x2 input)) / (sum (maximaUpArrowsList x1 x2 input))
 
--- allDistances dClusters input = [(x1, x2, d) | x1 <- dClusters, x2 <- dClusters, x1 /= x2, d <- [distance x1 x2 input]]
 allDistances dClusters input = [(x1, x2, d) | x1 <- dClusters, x2 <- dClusters, x1 /= x2, x1 <= x2,  d <- [distance x1 x2 input]]
 
 first (value, _, _) = value
