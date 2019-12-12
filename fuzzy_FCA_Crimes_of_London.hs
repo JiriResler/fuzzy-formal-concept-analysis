@@ -3,21 +3,17 @@ import System.IO
 
 main :: IO ()
 main = do 
-----------------------------------------------------------------------------------------------------------------------------------------
-  let inputTextFile = "input/Crimes_2008.txt"
-  let outputTextFile = "output/Crimes_2008_output_first.txt"
-----------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------
+  let inputTextFile = "input/crimes_2008.txt"
+  let outputTextFile = "output/clusters_2008.txt"
+---------------------------------------------------
   inputFile <- readFile inputTextFile
   let linesInput = separateLines inputFile
   let inputMatrix = matrixToDoubles $ map firstTwoOut linesInput
   let indecesBoroughs = indexAndBoroughList linesInput
   let inputClusters = dClusters inputMatrix
   riceSiffAlgorithm inputMatrix inputClusters inputClusters indecesBoroughs outputTextFile
-  -- riceSiffAlgorithmWithoutCycle inputMatrix inputClusters inputClusters indecesBoroughs
 
-----------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------
-  
 riceSiffAlgorithm input inputClusters outputClusters indecesAndBoroughs outputTextFile =
   if (length inputClusters) > 1 
     then do
@@ -43,28 +39,6 @@ riceSiffAlgorithm input inputClusters outputClusters indecesAndBoroughs outputTe
         putStrLn("Done. Check the output text file.") 
         putStrLn("") 
         
-
-
-riceSiffAlgorithmWithoutCycle input inputClusters outputClusters indecesAndBoroughs =
-      do
-        putStrLn("Začiatok iterácie.")
-        let vzdialenosti = allDistances inputClusters input
-        let vzdialenostiHodnoty = zoznamVzdial vzdialenosti
-        let m = minimum vzdialenostiHodnoty 
-        let clustreVzdial = clustersByMinimum vzdialenosti m
-        let clustersWithoutDistance = tuplesWithoutDistance clustreVzdial
-        let listClusters = listOfClusters clustersWithoutDistance 
-        let v = nub listClusters 
-        let u = unionClusters v
-        let n = downArrow input $ upArrow input u
-        let oldD = inputClusters
-        let newD = unionLists (oldD \\ v) [n] 
-        let c = unionLists outputClusters [n]
-        let cVerbose = indecesToBoroughsMatrix outputClusters indecesAndBoroughs
-        putStrLn("Output clusters:") 
-        putStrLn("") 
-        print cVerbose
-
 separateLines input = map (wordsWhen (=='\t')) (lines input)
 
 wordsWhen     :: (Char -> Bool) -> String -> [String]
