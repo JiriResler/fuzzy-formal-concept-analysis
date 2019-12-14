@@ -4,8 +4,8 @@ import System.IO
 main :: IO ()
 main = do 
 ---------------------------------------------------
-  let inputTextFile = "input/crimes_2008.txt"
-  let outputTextFile = "output/clusters_2008.txt"
+  let inputTextFile = "input/crimes_2010.txt"
+  let outputTextFile = "output/clusters_2010.txt"
 ---------------------------------------------------
   inputFile <- readFile inputTextFile
   let linesInput = separateLines inputFile
@@ -36,7 +36,9 @@ riceSiffAlgorithm input inputClusters outputClusters indecesAndBoroughs outputTe
         hPrint outputFile cVerbose
         hClose outputFile
         putStrLn("") 
-        putStrLn("Done. Check the output text file.") 
+        putStrLn("Done. Check the output text file:") 
+        putStrLn("") 
+        print outputTextFile
         putStrLn("") 
         
 separateLines input = map (wordsWhen (=='\t')) (lines input)
