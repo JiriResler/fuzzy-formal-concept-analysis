@@ -4,8 +4,8 @@ import System.IO
 main :: IO ()
 main = do 
 ---------------------------------------------------
-  let inputTextFile = "input/crimes_2010.txt"
-  let outputTextFile = "output/clusters_2010.txt"
+  let inputTextFile = "input/crimes_2012.txt"
+  let outputTextFile = "output/clusters_2012.txt"
 ---------------------------------------------------
   inputFile <- readFile inputTextFile
   let linesInput = separateLines inputFile
