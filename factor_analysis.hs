@@ -7,13 +7,17 @@ main = do
     let cOutputClusters = [[1,5,7,9,11,12,17,20,26,29,31],[0,2,6,9,12,15,17,23,29],[3,20,26,31]]
     let elem = [1,5,7,9,11,12,17,20,26,29,31]
     let upArrowOneCluster = upArrow crimesMatrix elem
-    print upArrowOneCluster
-    -- let upArrowsAllClusters = map (upArrow crimesMatrix) cOutputClusters
-    -- -- print upArrowsAllClusters
-    let newMatrixForCluster = createMatrix [0..31] elem upArrowOneCluster
-    print newMatrixForCluster
+    let newMatrixForCluster = createMatrix [0..length crimesMatrix - 1] elem upArrowOneCluster
+    -- print newMatrixForCluster
+    let sumCrimes = sumMatrix crimesMatrix
+    let sumNewMatrix = sumMatrix newMatrixForCluster
+    let distance = sumCrimes - sumNewMatrix
+    print distance
 
 
+
+sumMatrix [] = 0
+sumMatrix (x:xs) = (sum x) + sumMatrix xs
 
 createMatrix idxs cluster upArrow = [ createList idx cluster upArrow | idx <- idxs ]
 
