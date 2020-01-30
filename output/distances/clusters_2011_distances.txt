@@ -1,0 +1,782 @@
+[
+    (["Barking and Dagenham"], 106.08961100000002),
+    (
+        [
+            "Barnet", "Camden", "Hammersmith and Fulham", "Haringey"
+        ],
+        99.14579600000002
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Bexley",
+            "Brent",
+            "Camden",
+            "Croydon",
+            "Ealing",
+            "Enfield",
+            "Greenwich",
+            "Hackney",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Havering",
+            "Hillingdon",
+            "Hounslow",
+            "Islington",
+            "Lambeth",
+            "Lewisham",
+            "Newham",
+            "Redbridge",
+            "Southwark",
+            "Tower Hamlets",
+            "Waltham Forest",
+            "Westminster"
+        ],
+        62.75142500000002
+    ),
+    (
+        [
+            "Brent", "Westminster"
+        ],
+        102.36121600000001
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Bromley",
+            "Camden",
+            "Croydon",
+            "Ealing",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Hillingdon",
+            "Hounslow",
+            "Islington",
+            "Lambeth",
+            "Lewisham",
+            "Southwark",
+            "Waltham Forest",
+            "Westminster"
+        ],
+        71.48049800000003
+    ),
+    (["Camden"], 105.32119500000002),
+    (
+        [
+            "Camden", "Croydon", "Islington", "Westminster"
+        ],
+        96.00937600000002
+    ),
+    (
+        [
+            "Ealing", "Islington", "Westminster"
+        ],
+        99.24801800000002
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Camden",
+            "Enfield",
+            "Hammersmith and Fulham",
+            "Islington",
+            "Lambeth",
+            "Westminster"
+        ],
+        89.29298600000001
+    ),
+    (
+        [
+            "Greenwich",
+            "Hillingdon",
+            "Lambeth",
+            "Lewisham",
+            "Southwark",
+            "Westminster"
+        ],
+        91.80225800000002
+    ),
+    (
+        [
+            "Camden",
+            "Hackney",
+            "Lambeth",
+            "Southwark",
+            "Tower Hamlets",
+            "Westminster"
+        ],
+        91.44819200000002
+    ),
+    (["Hammersmith and Fulham"], 105.81684700000002),
+    (["Haringey"], 106.40384400000002),
+    (
+        [
+            "Barking and Dagenham",
+            "Brent",
+            "Camden",
+            "Croydon",
+            "Ealing",
+            "Enfield",
+            "Hammersmith and Fulham",
+            "Harrow",
+            "Hillingdon",
+            "Islington",
+            "Kensington and Chelsea",
+            "Lambeth",
+            "Lewisham",
+            "Southwark",
+            "Waltham Forest",
+            "Westminster"
+        ],
+        71.75910400000001
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Camden",
+            "Croydon",
+            "Hammersmith and Fulham",
+            "Havering",
+            "Hillingdon",
+            "Islington",
+            "Lambeth",
+            "Waltham Forest",
+            "Westminster"
+        ],
+        83.29827800000001
+    ),
+    (["Hillingdon"], 106.29712000000002),
+    (
+        [
+            "Hounslow", "Westminster"
+        ],
+        103.16423000000002
+    ),
+    (
+        [
+            "Islington", "Westminster"
+        ],
+        101.70479200000003
+    ),
+    (
+        [
+            "Camden", "Kensington and Chelsea", "Westminster"
+        ],
+        99.69645800000002
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Camden",
+            "Croydon",
+            "Ealing",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Hillingdon",
+            "Hounslow",
+            "Islington",
+            "Kensington and Chelsea",
+            "Kingston upon Thames",
+            "Lambeth",
+            "Lewisham",
+            "Newham",
+            "Southwark",
+            "Tower Hamlets",
+            "Waltham Forest",
+            "Westminster"
+        ],
+        68.25625400000001
+    ),
+    (["Lambeth"], 105.69431800000002),
+    (
+        [
+            "Lewisham", "Westminster"
+        ],
+        102.37477200000002
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Camden",
+            "Croydon",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Islington",
+            "Lambeth",
+            "Merton",
+            "Westminster"
+        ],
+        85.26276200000002
+    ),
+    (
+        [
+            "Newham", "Southwark", "Westminster"
+        ],
+        99.06912800000002
+    ),
+    (
+        [
+            "Camden", "Hammersmith and Fulham", "Redbridge"
+        ],
+        100.51863800000002
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Brent",
+            "Camden",
+            "Croydon",
+            "Ealing",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Havering",
+            "Hillingdon",
+            "Islington",
+            "Lambeth",
+            "Lewisham",
+            "Redbridge",
+            "Richmond upon Thames",
+            "Southwark",
+            "Waltham Forest",
+            "Westminster"
+        ],
+        71.55923200000004
+    ),
+    (
+        [
+            "Southwark", "Westminster"
+        ],
+        101.50010600000002
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Bromley",
+            "Camden",
+            "Croydon",
+            "Ealing",
+            "Enfield",
+            "Greenwich",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Hillingdon",
+            "Hounslow",
+            "Islington",
+            "Lambeth",
+            "Lewisham",
+            "Southwark",
+            "Sutton",
+            "Tower Hamlets",
+            "Waltham Forest",
+            "Westminster"
+        ],
+        67.519162
+    ),
+    (
+        [
+            "Tower Hamlets", "Westminster"
+        ],
+        102.45141400000001
+    ),
+    (
+        [
+            "Waltham Forest", "Westminster"
+        ],
+        102.75606400000002
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Camden",
+            "Ealing",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Islington",
+            "Lambeth",
+            "Newham",
+            "Southwark",
+            "Tower Hamlets",
+            "Waltham Forest",
+            "Wandsworth",
+            "Westminster"
+        ],
+        75.59860700000003
+    ),
+    (["Westminster"], 103.48836000000001),
+    (
+        [
+            "Hammersmith and Fulham", "Islington", "Westminster"
+        ],
+        97.96394300000001
+    ),
+    (
+        [
+            "Camden",
+            "Ealing",
+            "Islington",
+            "Lewisham",
+            "Southwark",
+            "Westminster"
+        ],
+        88.79633000000001
+    ),
+    (
+        [
+            "Camden",
+            "Croydon",
+            "Haringey",
+            "Islington",
+            "Westminster"
+        ],
+        92.98082800000002
+    ),
+    (
+        [
+            "Camden",
+            "Croydon",
+            "Haringey",
+            "Islington",
+            "Waltham Forest",
+            "Westminster"
+        ],
+        90.04143800000003
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Camden",
+            "Croydon",
+            "Enfield",
+            "Hammersmith and Fulham",
+            "Havering",
+            "Hillingdon",
+            "Islington",
+            "Lambeth",
+            "Waltham Forest",
+            "Westminster"
+        ],
+        80.84589500000003
+    ),
+    (
+        [
+            "Hillingdon", "Hounslow", "Westminster"
+        ],
+        99.83822600000002
+    ),
+    (
+        [
+            "Lambeth", "Southwark", "Westminster"
+        ],
+        97.83449600000002
+    ),
+    (
+        [
+            "Camden",
+            "Ealing",
+            "Hammersmith and Fulham",
+            "Islington",
+            "Lewisham",
+            "Southwark",
+            "Westminster"
+        ],
+        85.25156400000003
+    ),
+    (
+        [
+            "Lambeth", "Newham", "Southwark", "Westminster"
+        ],
+        95.62373600000002
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Brent",
+            "Bromley",
+            "Camden",
+            "Croydon",
+            "Ealing",
+            "Enfield",
+            "Greenwich",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Havering",
+            "Hillingdon",
+            "Hounslow",
+            "Islington",
+            "Kensington and Chelsea",
+            "Kingston upon Thames",
+            "Lambeth",
+            "Lewisham",
+            "Newham",
+            "Redbridge",
+            "Southwark",
+            "Sutton",
+            "Tower Hamlets",
+            "Waltham Forest",
+            "Westminster"
+        ],
+        57.029163000000004
+    ),
+    (
+        [
+            "Camden",
+            "Ealing",
+            "Hammersmith and Fulham",
+            "Hillingdon",
+            "Hounslow",
+            "Islington",
+            "Lewisham",
+            "Southwark",
+            "Westminster"
+        ],
+        80.93585900000002
+    ),
+    (
+        [
+            "Camden",
+            "Ealing",
+            "Greenwich",
+            "Hammersmith and Fulham",
+            "Hillingdon",
+            "Hounslow",
+            "Islington",
+            "Lambeth",
+            "Lewisham",
+            "Southwark",
+            "Westminster"
+        ],
+        77.58034700000002
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Bexley",
+            "Brent",
+            "Bromley",
+            "Camden",
+            "Croydon",
+            "Ealing",
+            "Enfield",
+            "Greenwich",
+            "Hackney",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Havering",
+            "Hillingdon",
+            "Hounslow",
+            "Islington",
+            "Kensington and Chelsea",
+            "Kingston upon Thames",
+            "Lambeth",
+            "Lewisham",
+            "Newham",
+            "Redbridge",
+            "Southwark",
+            "Sutton",
+            "Tower Hamlets",
+            "Waltham Forest",
+            "Westminster"
+        ],
+        57.64203200000001
+    ),
+    (
+        [
+            "Camden",
+            "Croydon",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Islington",
+            "Redbridge",
+            "Waltham Forest",
+            "Westminster"
+        ],
+        85.97587200000002
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Camden",
+            "Croydon",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Islington",
+            "Lambeth",
+            "Merton",
+            "Redbridge",
+            "Waltham Forest",
+            "Westminster"
+        ],
+        80.089898
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Camden",
+            "Croydon",
+            "Enfield",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Havering",
+            "Hillingdon",
+            "Islington",
+            "Lambeth",
+            "Merton",
+            "Redbridge",
+            "Waltham Forest",
+            "Westminster"
+        ],
+        75.10328600000003
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Brent",
+            "Camden",
+            "Croydon",
+            "Ealing",
+            "Enfield",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Havering",
+            "Hillingdon",
+            "Islington",
+            "Lambeth",
+            "Lewisham",
+            "Merton",
+            "Redbridge",
+            "Richmond upon Thames",
+            "Southwark",
+            "Waltham Forest",
+            "Westminster"
+        ],
+        67.95295100000004
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Barnet",
+            "Camden",
+            "Croydon",
+            "Ealing",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Islington",
+            "Kensington and Chelsea",
+            "Lambeth",
+            "Lewisham",
+            "Newham",
+            "Redbridge",
+            "Southwark",
+            "Tower Hamlets",
+            "Waltham Forest",
+            "Wandsworth",
+            "Westminster"
+        ],
+        65.46557000000001
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Barnet",
+            "Brent",
+            "Camden",
+            "Croydon",
+            "Ealing",
+            "Enfield",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Harrow",
+            "Hillingdon",
+            "Islington",
+            "Kensington and Chelsea",
+            "Lambeth",
+            "Lewisham",
+            "Newham",
+            "Redbridge",
+            "Southwark",
+            "Tower Hamlets",
+            "Waltham Forest",
+            "Wandsworth",
+            "Westminster"
+        ],
+        59.83790800000003
+    ),
+    (
+        [
+            "Brent", "Tower Hamlets", "Westminster"
+        ],
+        99.50894600000002
+    ),
+    (
+        [
+            "Camden",
+            "Hackney",
+            "Kensington and Chelsea",
+            "Lambeth",
+            "Southwark",
+            "Tower Hamlets",
+            "Westminster"
+        ],
+        89.05372600000003
+    ),
+    (
+        [
+            "Brent",
+            "Camden",
+            "Islington",
+            "Lambeth",
+            "Lewisham",
+            "Newham",
+            "Southwark",
+            "Tower Hamlets",
+            "Westminster"
+        ],
+        80.69827700000002
+    ),
+    (
+        [
+            "Brent",
+            "Camden",
+            "Hackney",
+            "Hammersmith and Fulham",
+            "Islington",
+            "Kensington and Chelsea",
+            "Lambeth",
+            "Lewisham",
+            "Newham",
+            "Southwark",
+            "Tower Hamlets",
+            "Westminster"
+        ],
+        75.634376
+    ),
+    (
+        [
+            "Brent",
+            "Camden",
+            "Croydon",
+            "Ealing",
+            "Greenwich",
+            "Hackney",
+            "Hammersmith and Fulham",
+            "Hillingdon",
+            "Hounslow",
+            "Islington",
+            "Kensington and Chelsea",
+            "Lambeth",
+            "Lewisham",
+            "Newham",
+            "Southwark",
+            "Tower Hamlets",
+            "Westminster"
+        ],
+        64.93611700000001
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Bexley",
+            "Brent",
+            "Bromley",
+            "Camden",
+            "Croydon",
+            "Ealing",
+            "Enfield",
+            "Greenwich",
+            "Hackney",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Havering",
+            "Hillingdon",
+            "Hounslow",
+            "Islington",
+            "Kensington and Chelsea",
+            "Kingston upon Thames",
+            "Lambeth",
+            "Lewisham",
+            "Merton",
+            "Newham",
+            "Redbridge",
+            "Richmond upon Thames",
+            "Southwark",
+            "Sutton",
+            "Tower Hamlets",
+            "Waltham Forest",
+            "Westminster"
+        ],
+        56.631439000000015
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Barnet",
+            "Brent",
+            "Camden",
+            "Croydon",
+            "Ealing",
+            "Enfield",
+            "Greenwich",
+            "Hackney",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Harrow",
+            "Hillingdon",
+            "Hounslow",
+            "Islington",
+            "Kensington and Chelsea",
+            "Lambeth",
+            "Lewisham",
+            "Newham",
+            "Redbridge",
+            "Southwark",
+            "Tower Hamlets",
+            "Waltham Forest",
+            "Wandsworth",
+            "Westminster"
+        ],
+        56.32236299999998
+    ),
+    (
+        [
+            "Barking and Dagenham",
+            "Barnet",
+            "Bexley",
+            "Brent",
+            "Bromley",
+            "Camden",
+            "Croydon",
+            "Ealing",
+            "Enfield",
+            "Greenwich",
+            "Hackney",
+            "Hammersmith and Fulham",
+            "Haringey",
+            "Harrow",
+            "Havering",
+            "Hillingdon",
+            "Hounslow",
+            "Islington",
+            "Kensington and Chelsea",
+            "Kingston upon Thames",
+            "Lambeth",
+            "Lewisham",
+            "Merton",
+            "Newham",
+            "Redbridge",
+            "Richmond upon Thames",
+            "Southwark",
+            "Sutton",
+            "Tower Hamlets",
+            "Waltham Forest",
+            "Wandsworth",
+            "Westminster"
+        ],
+        54.00591999999998
+    ),
+    (
+        [
+            "Barking and Dagenham", "Camden", "Islington", "Westminster"
+        ],
+        95.10893200000001
+    )
+]

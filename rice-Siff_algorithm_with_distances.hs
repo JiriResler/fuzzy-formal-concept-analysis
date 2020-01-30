@@ -1,76 +1,55 @@
 import Data.List
+import System.IO
 
 main :: IO ()
 main = do 
-  -- input <- readFile "Crimes_2008.txt"
-  -- print $ separateLines input
-  putStrLn("____________________________________________________________________________________________________________________________________________________________________________________________")
-  putStrLn("")
-  putStrLn("Input:")
-  putStrLn("")
-  let input2 = [[1, 0.5, 0], [0, 0.5, 1], [0.5, 0, 0.5], [1, 0.5, 0.5]]
-  -- print input2
-  putStrLn("| 1.0 | 0.5 | 0.0 |")
-  putStrLn("-------------------")
-  putStrLn("| 0.0 | 0.5 | 1.0 |")
-  putStrLn("-------------------")
-  putStrLn("| 0.5 | 0.0 | 0.5 |")
-  putStrLn("-------------------")
-  putStrLn("| 1.0 | 0.5 | 0.5 |")
-  putStrLn("")
-  let inputClusters = dClusters input2
-  putStrLn("Vstupné clustre pre algoritmus:")
-  print inputClusters
-  let vzdialenosti = allDistances inputClusters input2
-  putStrLn("")
-  putStrLn("Všetky vzdialenosti:")
-  print vzdialenosti
-  putStrLn("")
-  let vzdialenostiHodnoty = zoznamVzdial vzdialenosti
-  putStrLn("Hodnoty vzdialeností:")
-  print vzdialenostiHodnoty
-  putStrLn("")
-  putStrLn("Minimum:")
-  let m = minimum vzdialenostiHodnoty 
-  print m
-  putStrLn("")
-  let clustreVzdial = clustersByMinimum vzdialenosti m
-  putStrLn("Clustre s mininálnou vzdialenosťou:")
-  print clustreVzdial
-  putStrLn("")
-  let clustersWithoutDistance = tuplesWithoutDistance clustreVzdial
-  putStrLn("Epsilon:")
-  print clustersWithoutDistance
-  putStrLn("")
-  let listClusters = listOfClusters clustersWithoutDistance 
-  putStrLn("List of clusters:")
-  print listClusters
-  putStrLn("")
-  let v = nub listClusters 
-  putStrLn("V:")
-  print v 
-  putStrLn("")
-  let u = unionClusters v
-  let n = downArrow input2 $ upArrow input2 u
-  putStrLn("N:")
-  print n
-  putStrLn("")
-  let oldD = inputClusters
-  putStrLn("Pôvodné D:")
-  print oldD
-  putStrLn("")
-  -- print [n]
-  putStrLn("Nové D:")
-  let newD = union (oldD \\ v) [n] 
-  print newD
-  putStrLn("")
-  let c = union oldD [n]
-  putStrLn("Nové C:")
-  print c
-  putStrLn("")
-  putStrLn("============================================================================================================================================================================================")
-  
--- readFile
+---------------------------------------------------
+  let inputTextFile = "input/crimes_2017.txt"
+  let outputTextFile = ""
+---------------------------------------------------
+  inputFile <- readFile inputTextFile
+  let linesInput = separateLines inputFile
+  let inputMatrix = matrixToDoubles $ map firstTwoOut linesInput
+  let indecesBoroughs = indexAndBoroughList linesInput
+  let inputClusters = dClusters inputMatrix
+  riceSiffAlgorithm inputMatrix inputClusters inputClusters indecesBoroughs outputTextFile
+
+riceSiffAlgorithm input inputClusters outputClusters indecesAndBoroughs outputTextFile =
+  if (length inputClusters) > 1 
+    then do
+        let vzdialenosti = allDistances inputClusters input
+        let vzdialenostiHodnoty = zoznamVzdial vzdialenosti
+        let m = minimum vzdialenostiHodnoty 
+        let clustreVzdial = clustersByMinimum vzdialenosti m
+        let clustersWithoutDistance = tuplesWithoutDistance clustreVzdial
+        let listClusters = listOfClusters clustersWithoutDistance 
+        let v = nub listClusters 
+        let u = unionClusters v
+        let n = downArrow input $ upArrow input u
+        let oldD = inputClusters
+        let newD = unionLists (oldD \\ v) [n] 
+        let c = unionLists outputClusters [n]
+        riceSiffAlgorithm input newD c indecesAndBoroughs outputTextFile
+    else do
+        let pairsClustersAndDistances = clustersWithDistances outputClusters input indecesAndBoroughs
+        print pairsClustersAndDistances
+
+clustersWithDistances outputClusters crimesMatrix indecesAndBoroughs = [(indecesToBoroughsList cluster indecesAndBoroughs, distanceClusterToInputMatrix cluster crimesMatrix) | cluster <- outputClusters]
+
+distanceClusterToInputMatrix cluster crimesMatrix = (sumMatrix crimesMatrix) - (sumMatrix (createMatrix [0..length crimesMatrix - 1] cluster $ upArrow crimesMatrix cluster))
+
+sumMatrix [] = 0
+sumMatrix (x:xs) = (sum x) + sumMatrix xs
+
+createMatrix idxs cluster upArrow = [createList idx cluster upArrow | idx <- idxs]
+
+zeros 0 = []
+zeros n = [0] ++ zeros (n - 1)
+
+createList idx cluster upArrow = if idx `elem` cluster
+                                   then upArrow
+                                 else zeros $ length upArrow
+        
 separateLines input = map (wordsWhen (=='\t')) (lines input)
 
 wordsWhen     :: (Char -> Bool) -> String -> [String]
@@ -78,15 +57,15 @@ wordsWhen p s =  case dropWhile p s of
                       "" -> []
                       s' -> w : wordsWhen p s''
                             where (w, s'') = break p s'
--------------
 
--- Input: [[1, 0.5, 0], [0, 0.5, 1], [0.5, 0, 0.5], [1, 0.5, 0.5]]
+stringToDouble :: String -> Double
+stringToDouble = read
+  
+stringToInteger :: String -> Integer
+stringToInteger = read
 
---        Table - input:
---       | 1.0 | 0.5 | 0.0 |
---       | 0.0 | 0.5 | 1.0 |
---       | 0.5 | 0.0 | 0.5 |
---       | 1.0 | 0.5 | 0.5 |
+listToDoubles xs = map stringToDouble xs
+matrixToDoubles input = [ listToDoubles l | l <- input]
 
 -- Returns a column of a matrix specified by index idx
 columnOnIndex [] _ = []
@@ -118,7 +97,7 @@ compareLists (x:xs) (up:ups) = if x >= up
 downArrow xs up = [y | y <- [0..(length xs) - 1], compareLists (xs !! y) up]
 
 -- Returns a list of indices of objects, which are in the same cluster
--- [downArrow input2 (upArrow input2 [0])] ++ [downArrow input2 (upArrow input2 [1])]
+-- [downArrow input (upArrow input [0])] ++ [downArrow input (upArrow input [1])]
 dClusters input = [dCluster | idx <- [0..(length input) - 1], dCluster <- [downArrow input (upArrow input [idx])]]
 
 -- Returns a list of minima of upArrows of two clusters
@@ -132,7 +111,7 @@ maximaUpArrowsList x1 x2 input = [m | idx <- [0..(length (input !! 0)) - 1], m <
 distance :: (Fractional a, Ord a) => [Int] -> [Int] -> [[a]] -> a
 distance x1 x2 input = 1 - (sum (minimaUpArrowsList x1 x2 input)) / (sum (maximaUpArrowsList x1 x2 input))
 
-allDistances dClusters input = [(x1, x2, d) | x1 <- dClusters, x2 <- dClusters, x1 /= x2, d <- [distance x1 x2 input]]
+allDistances dClusters input = [(x1, x2, d) | x1 <- dClusters, x2 <- dClusters, x1 /= x2, x1 <= x2,  d <- [distance x1 x2 input]]
 
 first (value, _, _) = value
 second (_, value, _) = value
@@ -153,3 +132,12 @@ unionClustersWithDuplicates [] = []
 unionClustersWithDuplicates (x:xs) = x ++ (unionClusters xs) 
 
 unionClusters vClusters = nub $ unionClustersWithDuplicates vClusters
+
+unionLists xs ys = nub $ xs ++ ys
+
+firstTwoOut (x:y:tail) = tail
+
+indexAndBoroughList input = [ (stringToInteger index, borough) | idx <- [0..((length input) - 1)], index <- [(input !! idx) !! 0], borough <- [(input !! idx) !! 1]]
+
+indecesToBoroughsList list indecesBoroughs = [ borough | idx <- [0..((length list) - 1)], borough <- [snd (indecesBoroughs !! (list !! idx))]]
+indecesToBoroughsMatrix cluster indecesBoroughs = [ indecesToBoroughsList list indecesBoroughs | list <- cluster] 
